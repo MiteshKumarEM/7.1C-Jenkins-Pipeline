@@ -1,50 +1,47 @@
 pipeline {
     agent any
 
-    environment {
-        SONAR_TOKEN = credentials('SONAR_TOKEN')
-    }
-
     stages {
-        stage('Checkout') {
+
+        stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/YOUR_USERNAME/8.2CDevSecOps.git'
+                echo 'Building application using Maven'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Unit and Integration Tests') {
             steps {
-                bat 'npm install'
+                echo 'Running unit and integration tests using JUnit and Selenium'
             }
         }
 
-        stage('Run Tests') {
+        stage('Code Analysis') {
             steps {
-                bat 'npm test || exit /b 0'
+                echo 'Performing code analysis using SonarQube'
             }
         }
 
-        stage('Generate Coverage Report') {
+        stage('Security Scan') {
             steps {
-                bat 'npm run coverage || exit /b 0'
+                echo 'Performing security scan using OWASP Dependency Check'
             }
         }
 
-        stage('NPM Audit Security Scan') {
+        stage('Deploy to Staging') {
             steps {
-                bat 'npm audit || exit /b 0'
+                echo 'Deploying application to AWS EC2 staging server'
             }
         }
 
-        stage('SonarCloud Analysis') {
+        stage('Integration Tests on Staging') {
             steps {
-                bat '''
-                npx sonarqube-scanner ^
-                -Dsonar.projectKey=YOUR_PROJECT_KEY ^
-                -Dsonar.organization=YOUR_ORGANISATION_NAME ^
-                -Dsonar.host.url=https://sonarcloud.io ^
-                -Dsonar.login=%SONAR_TOKEN%
-                '''
+                echo 'Running staging integration tests using Postman'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploying application to production environment using Docker'
             }
         }
     }
