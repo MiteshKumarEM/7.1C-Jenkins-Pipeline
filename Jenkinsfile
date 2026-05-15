@@ -5,43 +5,43 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building application using Maven'
+                echo 'Compiling the source code and preparing the application package with Maven'
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
-                echo 'Running unit and integration tests using JUnit and Selenium'
+                echo 'Executing unit checks with JUnit and validating component interaction through Selenium'
             }
         }
 
         stage('Code Analysis') {
             steps {
-                echo 'Performing code analysis using SonarQube'
+                echo 'Reviewing the codebase with SonarQube to identify quality issues and coding standard violations'
             }
         }
 
         stage('Security Scan') {
             steps {
-                echo 'Performing security scan using OWASP Dependency Check'
+                echo 'Scanning project dependencies with OWASP Dependency Check to detect known vulnerabilities'
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying application to AWS EC2 staging server'
+                echo 'Publishing the latest application build to a staging AWS EC2 environment for validation'
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
-                echo 'Running staging integration tests using Postman'
+                echo 'Running API and workflow checks in the staging environment using Postman'
             }
         }
 
         stage('Deploy to Production') {
             steps {
-                echo 'Deploying application to production environment using Docker'
+                echo 'Releasing the verified application build to the production environment using Docker'
             }
         }
     }
