@@ -1,2 +1,2 @@
-Testing automatic Jenkins trigger-1
+Testing automatic Jenkins trigger-2
 
